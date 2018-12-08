@@ -1,5 +1,5 @@
 var express = require('express')
-var ws = require('./ws')
+var ws = require('ws').Server
 const PORT = process.env.PORT || 5000
 var app = express()
 
@@ -8,5 +8,18 @@ app.get('/', function (req, res) {
 })
 
 app.listen(PORT, function () {
-  console.log('Example app listening on port '+PORT)
+  console.log('Example app listening on port ${ PORT }')
 })
+
+const wss = new ws({ app });
+
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+  ws.on('close', () => console.log('Client disconnected'));
+});
+
+setInterval(() => {
+  wss.clients.forEach((client) => {
+    client.send(new Date().toTimeString());
+  });
+}, 1000);
