@@ -1,7 +1,9 @@
-var express = require('express')
-var SocketServer = require('./ws')
-const PORT = process.env.PORT || 5000
-var app = express()
+'use strict';
+
+var express = require('express');
+var SocketServer = require('ws').Server;
+const PORT = process.env.PORT || 5000;
+var app = express();
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/ws.html');
