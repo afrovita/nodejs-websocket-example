@@ -1,5 +1,5 @@
 var express = require('express')
-var ws = require('ws').Server
+var SocketServer = require('./ws')
 const PORT = process.env.PORT || 5000
 var app = express()
 
@@ -11,7 +11,7 @@ app.listen(PORT, function () {
   console.log('Example app listening on port ${ PORT }')
 })
 
-const wss = new ws({ app });
+const wss = new SocketServer({ app });
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
