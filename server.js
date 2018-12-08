@@ -1,12 +1,12 @@
 var express = require('express')
 var ws = require('./ws')
-
+const PORT = process.env.PORT || 5000
 var app = express()
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/ws.html');
 })
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(PORT, function () {
+  console.log('Example app listening on port '+PORT)
 })
